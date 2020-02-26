@@ -1,0 +1,351 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Documentação referente a api de veículos",
+      "description": "Tenho como objetivo atraves desse json explicar o funcionamento básico da api",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "schemes": [
+      "http"
+    ],
+    "paths": {
+      "/users/register": {
+        "post": {
+          "summary": "Create user into the system",
+          "description": "Create new user in system",
+          "parameters": [
+            {
+              "name": "email",
+              "in": "body",
+              "description": "The user name for login",
+              "required": true,
+              "type": "string"
+            },
+            {
+                "name": "password",
+                "in": "body",
+                "description": "The password for login in clear text",
+                "required": true,
+                "type": "string"
+             }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "New user is created",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            },
+            "400": {
+                "description": "Erro while create a new user"
+              }
+          }
+        }
+      },
+      "/users/authenticate": {
+        "post": {
+          "summary": "Logs user into the system",
+          "operationId": "Auth",
+          "consumes": [],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "email",
+              "in": "body",
+              "description": "The user name for login",
+              "required": true,
+              "type": "string"
+            },
+            {
+                "name": "password",
+                "in": "body",
+                "description": "The password for login in clear text",
+                "required": true,
+                "type": "string"
+             }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation"
+            },
+            "400": {
+                "description": "Error while authenticate"
+            }
+          }
+        }
+      },
+      "/vehicle": {
+          "get": {
+            "summary": "Get all vehicles of system",
+            "description": "Get all vehicles of system",
+            "consumes": [
+                "application/json"
+            ],
+            "parameters": [
+                {
+                  "name": "Authorization",
+                  "description": "Token de acesso à url",
+                  "in": "header",
+                  "required": true
+                }
+            ],
+            "produces": [
+                "application/json"
+              ],
+              "responses": {
+                "200": {
+                  "description": "Get all vehicles",
+                  "schema": {
+                    "$ref": "#/definitions/Vehicles"
+                  }
+                }
+            }
+          },
+          "post": {
+            "summary": "Create new vehicle in system",
+            "description": "Create new vehicle in system",
+            "consumes": [
+                "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "Authorization",
+                "description": "Token de acesso à url",
+                "in": "header",
+                "required": true
+              },
+              {
+                "name": "vehicle",
+                "in": "body",
+                "description": "The vehicle name",
+                "required": true,
+                "type": "string"
+              },
+              {
+                  "name": "brand",
+                  "in": "body",
+                  "description": "The brand of vehicle",
+                  "required": true,
+                  "type": "string"
+               },
+               {
+                "name": "year",
+                "in": "body",
+                "description": "The year of vehicle",
+                "required": true,
+                "type": "string"
+             }
+            ],
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "description": "New vehicle is created"
+              },
+              "400": {
+                  "description": "Erro while create a new vehicle"
+                }
+            }
+          }
+      },
+      "/vehicle/{id}": {
+        "patch": {
+            "summary": "Update the status of vehicle",
+            "description": "Update the status of vehicle",
+            "consumes": [
+                "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "Authorization",
+                "description": "Token de acesso à url",
+                "in": "header",
+                "required": true
+              },
+              {
+                "name": "vehicle",
+                "in": "body",
+                "description": "The vehicle name",
+                "required": true,
+                "type": "string"
+              },
+              {
+                  "name": "brand",
+                  "in": "body",
+                  "description": "The brand of vehicle",
+                  "required": true,
+                  "type": "string"
+               },
+               {
+                "name": "year",
+                "in": "body",
+                "description": "The year of vehicle",
+                "required": true,
+                "type": "string"
+             }
+            ],
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "description": "Vehicle status updated"
+              },
+              "400": {
+                  "description": "Erro while update vehicle"
+                }
+            }
+          },
+          "put": {
+            "summary": "Update vehicle in system",
+            "description": "Update vehicle in system",
+            "consumes": [
+                "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "Authorization",
+                "description": "Token de acesso à url",
+                "in": "header",
+                "required": true
+              },
+              {
+                "name": "vehicle",
+                "in": "body",
+                "description": "The vehicle name",
+                "required": true,
+                "type": "string"
+              },
+              {
+                  "name": "brand",
+                  "in": "body",
+                  "description": "The brand of vehicle",
+                  "required": true,
+                  "type": "string"
+               },
+               {
+                "name": "year",
+                "in": "body",
+                "description": "The year of vehicle",
+                "required": true,
+                "type": "string"
+              },
+              {
+                "name": "description",
+                "in": "body",
+                "description": "Description of vehicle",
+                "type": "string"  
+              }
+            ],
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "description": "Vehicle updated"
+              },
+              "400": {
+                  "description": "Erro while update a new vehicle"
+                }
+            }
+          }
+      },
+      "/vehicle/datails/{id}": {
+        "get": {
+            "summary": "Get one vehicle of system",
+            "description": "Get one vehicle of system",
+            "consumes": [
+                "application/json"
+            ],
+            "parameters": [
+                {
+                  "name": "Authorization",
+                  "description": "Token de acesso à url",
+                  "in": "header",
+                  "required": true
+                }
+            ],
+            "produces": [
+                "application/json"
+              ],
+              "responses": {
+                "200": {
+                  "description": "Get the vehicle",
+                  "schema": {
+                    "$ref": "#/definitions/Vehicles"
+                  }
+                }
+            }
+          }
+      }
+    },
+    "definitions": {
+        "User": {
+          "type": "object",
+          "required": [
+            "email",
+            "password"
+          ],
+          "properties": {
+            "_id": {
+              "type": "string",
+              "uniqueItems": true
+            },
+            "email": {
+              "type": "string",
+              "uniqueItems": true
+            },
+            "password": {
+              "type": "string"
+            }
+          }
+        },
+        "Vehicles": {
+          "type": "object",
+          "required": [
+            "vehicle",
+            "brand",
+            "year"
+          ],
+          "properties": {
+            "_id": {
+              "type": "string",
+              "uniqueItems": true
+            },
+            "vehicle": {
+              "type": "string"
+            },
+            "brand": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "year": {
+              "type": "number"
+            },
+            "updated": {
+              "type": "string"
+            },
+            "created": {
+              "type": "string"
+            },
+            "active": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+}
